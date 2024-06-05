@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: stable
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30001
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

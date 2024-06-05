@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "workmomentum.fullname" . }}
+  labels:
+    app: {{ include "workmomentum.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "workmomentum.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "workmomentum.name" . }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: welcome-message
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
+      volumes:
+        - name: welcome-message
+          configMap:
+            name: welcome-message

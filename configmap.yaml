@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: welcome-message
+  labels:
+    app: {{ include "workmomentum.name" . }}
+data:
+  index.html: |
+    <html>
+    <head><title>Welcome to Gen WorkMomentum</title></head>
+    <body><h1>Welcome to Gen WorkMomentum</h1></body>
+    </html>
